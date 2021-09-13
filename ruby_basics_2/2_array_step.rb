@@ -18,4 +18,3 @@ p array_3
 # Вариант 4
 array_4 = Range.new(10,100).step(5)
 p array_4.to_a
-
