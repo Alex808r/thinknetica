@@ -6,14 +6,15 @@
 
 puts "Программа расчитывает идельный вес."
 print "Введите ваше имя: "
-name = gets.strip.capitalize # удалим whitespaces и сделаем имя с заглавной буквы
+name = gets.strip.capitalize # удалим wWhitespace(.strip) и сделаем имя с заглавной буквы(capitalize)
 
 print "Введите ваш рост: "
-height = gets.to_i # или height = Integer(gets) чтобы сразу задать допустимый тип вводимого значения
+height = gets.to_i # или height = Integer(gets) #чтобы сразу задать допустимый тип вводимого значения
 
 PARAMETR = 110
 resault = (height - PARAMETR) * 1.15
 
+# выведем резуальтат в консоль
 puts resault < 0 ? "#{name}, Ваш вес уже оптимальный." :  "#{name}, Ваш идельный вес: #{resault.round(2)}"
 
 # без тернарного оператора
