@@ -8,7 +8,6 @@ kazan    = RailwayStation.new('Kazan')
 novgorod = RailwayStation.new('Novgorod')
 kirov    = RailwayStation.new('Kirov')
 
-
 # Поезда:
 train_1  = Train.new('passenger', 10)
 train_2  = Train.new('cargo', 20)
@@ -18,9 +17,13 @@ ro = Route.new(kazan, kirov)
 ro.add_station(novgorod)
 ro.add_station(moscow)
 
-ro.station_list
 
 train_1.take_route(ro)
+puts train_1.current_station
+
+
+
+
 kazan.take_a_train(train_1)
 kazan.take_a_train(train_2)
 kazan.list_train
