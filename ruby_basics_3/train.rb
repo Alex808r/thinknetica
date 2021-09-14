@@ -3,8 +3,9 @@ class Train
   attr_accessor :speed
   attr_reader :type_of_train, :current_route
 
-  def initialize(type_of_train, number_of_wagons)
+  def initialize(type_of_train, number_of_wagons, train_number)
     @speed = 0
+    @train_number = train_number
     if type_of_train == "passenger" || type_of_train == "cargo"
       @type_of_train = type_of_train
     else
