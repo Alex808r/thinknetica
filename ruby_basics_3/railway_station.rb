@@ -14,7 +14,6 @@ class RailwayStation
   def train_type_count(type)
     @list_train.count { |train| train.type_of_train.eql?(type)  }
     #@list_train.count { |train| train.type_of_train == type  }
-
   end
 
   def train_type(type)

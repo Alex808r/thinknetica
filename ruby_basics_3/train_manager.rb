@@ -3,45 +3,45 @@ require_relative "route"
 require_relative "train"
 
 # Станции:
-moscow   = RailwayStation.new('Moscow')
 kazan    = RailwayStation.new('Kazan')
 novgorod = RailwayStation.new('Novgorod')
+moscow   = RailwayStation.new('Moscow')
 kirov    = RailwayStation.new('Kirov')
 
 # Поезда:
-train_1  = Train.new('passenger', 10)
-train_2  = Train.new('cargo', 20)
+train_1  = Train.new('passenger', 10, '1A' )
+train_2  = Train.new('cargo', 20, '2B')
 
 # Маршруты:
 ro = Route.new(kazan, kirov)
+
+# Добавим 2 промежуточные станции в маршрут
 ro.add_station(novgorod)
 ro.add_station(moscow)
 
-
+# Поезд принимает маршурт
 train_1.take_route(ro)
-puts train_1.current_station.name
+train_2.take_route(ro)
 
-
-kazan.take_a_train(train_1)
-kazan.take_a_train(train_2)
+# Посмотрим сколько поездов на старции Казань. Должно быть 2.
 kazan.list_train
 
-kazan.train_type_count('passenger')
-kazan.train_type('passenger')
-# train_1.location
+# Узнаем следующую станцию. Должна быть Новгород.
+train_1.next_station
 
-# train_1.go_to_route(moscow)
-# train_1.location
+# Отправим первый поезд на следующую станцию
+train_1.move_forward
 
-# train_1.next_to_route
-# train_1.location
-# train_1.back_to_route
-# train_1.location
+# Проверим сколько поездов на станции Казань. Должен быть 1.
+kazan.list_train
 
-# train_1.speed_up(10)
-# train_1.speed_down(11)
+# Проверим где стоит поезд 2. Должен быть на станции Казань.
+train_2.current_station
 
-# moscow.take_a_train(train_2)
-# moscow.take_a_train(train_1)
-# moscow.show_train_to_station
-# #moscow.show_train_by_type("cargo")
+# Проверим предыдущую станцию для поезда 2. Должны получить nil так как поезд на первой станции.
+train_2.previous_station
+
+# Отправим поезд 2 на предыдущую станцию. Должны получить nil так как поезд на первой станции.
+train_2.move_bakward
+
+
