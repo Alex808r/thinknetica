@@ -1,7 +1,7 @@
 class Train
 
   attr_accessor :speed
-  attr_reader :type_of_train, :current_route, :current_station
+  attr_reader :type_of_train, :current_route, :current_station, :number_of_wagons
 
   def initialize(type_of_train, number_of_wagons)
     @speed = 0
@@ -14,57 +14,49 @@ class Train
   end
 
   def speed_up(speed)
-    @speed > 0 ? @speed += speed : "Скорость не может иметь отрицательное значение"
+    @speed += speed if @speed > 0
   end
 
-  def speed_down(speed)
-    @speed >= speed ? @speed -= speed : "Введеная скорость(#{speed}) больше текущей (#{@speed})"
-  end
-
-  def show_list_of_wagons
-    "Количество вагонов: #{@number_of_wagons}"
+  def speed_stop
+    @speed = 0
   end
 
   def take_wagon
-    @speed == 0 ? "Вагон прицеплен. Всего #{@number_of_wagons += 1}" : "Скорость поезда больше 0"
+    @number_of_wagons += 1 if @speed == 0
   end
 
   def drop_wagon
-    @speed == 0 ? "Вагон отцеплен. Осталось #{@number_of_wagons -= 1}" : "Скорость поезда больше 0"
+    @number_of_wagons -= 1 if @speed == 0
   end
 
   def take_route(route)
     @current_route = route
     @current_station = @current_route.stations.first
-    @current_route.stations.first.take_a_train(self)
+    @current_station.take_a_train(self)
   end
 
-  # def current_station
-  #   @current_route.stations.index(@current_station)
-  # end
-
   def move_forward
-    @current_station_index = @current_route.stations.index(@current_station)
-    @current_station = @current_route.stations[@current_station_index + 1]
+    return unless next_station
+    @current_station.send_a_train(self)
+    @current_station = next_station
+    @current_station.take_a_train(self)
   end
 
   def move_bakward
-    @current_station_index = @current_route.stations.index(@current_station)
-    @current_station = @current_route.stations[@current_station_index - 1]
+    return unless previous_station
+    @current_station.send_a_train(self)
+    @current_station = previous_station
+    @current_station.take_a_train(self)
   end
 
   def next_station
-    if @current_station == @current_route.stations.last
-      @current_route.stations[@current_route.stations.length-2]
-    else
-      @current_route.stations[@current_route.stations.index(@current_station)+1]
+    if @current_route.stations.index(@current_station) != @current_route.stations.last
+        @current_route.stations[@current_route.stations.index(@current_station)+1]
     end
   end
 
   def previous_station
-    if @current_station == @current_route.stations[0]
-      @current_route.stations[1]
-    else
+    if @current_station != @current_route.stations[0]
       @current_route.stations[@current_route.stations.index(@current_station)-1]
     end
   end

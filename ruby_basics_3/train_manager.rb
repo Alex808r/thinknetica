@@ -19,9 +19,7 @@ ro.add_station(moscow)
 
 
 train_1.take_route(ro)
-puts train_1.current_station
-
-
+puts train_1.current_station.name
 
 
 kazan.take_a_train(train_1)
