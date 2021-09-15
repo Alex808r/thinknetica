@@ -1,9 +1,11 @@
 class Route
 
-  attr_reader :stations
+  attr_reader :stations, :first_station, :last_station
 
   def initialize(first_station, last_station)
     @stations = []
+    @first_station = first_station
+    @last_station = last_station
     @stations.push(first_station, last_station)
   end
 
