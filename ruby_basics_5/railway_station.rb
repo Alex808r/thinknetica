@@ -24,4 +24,8 @@ class RailwayStation
     @list_train.delete(train) if @list_train.include?(train)
   end
 
+  private
+  # сделаем недоступным изменениe списка поездов на станции из вне
+  attr_writer :list_train
+
 end

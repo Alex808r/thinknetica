@@ -1,33 +1,27 @@
 class Train
 
-  attr_accessor :speed
-  attr_reader :type_of_train, :current_route, :current_station, :number_of_wagons, :train_number
+  attr_reader :type_of_train, :current_route, :current_station, :wagons, :train_number, :speed
 
-  def initialize(type_of_train, number_of_wagons, train_number)
+  def initialize(train_number)
     @speed = 0
+    @wagons = []
     @train_number = train_number
-    if type_of_train == "passenger" || type_of_train == "cargo"
-      @type_of_train = type_of_train
-    else
-      abort "Не верный тип поезда"
-    end
-      @number_of_wagons = number_of_wagons
   end
 
   def speed_up(speed)
-    @speed += speed if @speed > 0
+    @speed += speed if speed > 0
   end
 
   def speed_stop
     @speed = 0
   end
 
-  def take_wagon
-    @number_of_wagons += 1 if @speed == 0
+  def take_wagon(wagon)
+    @wagons.push(wagon) if wagon.type == @type_of_train && @speed == 0
   end
 
   def drop_wagon
-    @number_of_wagons -= 1 if @speed == 0
+    @wagons.pop
   end
 
   def take_route(route)
@@ -61,4 +55,8 @@ class Train
       @current_route.stations[@current_route.stations.index(@current_station)-1]
     end
   end
+
+  private
+  # сделаем недоступным изменения скорости и количества вагонов
+  attr_writer :speed, :wagons
 end
