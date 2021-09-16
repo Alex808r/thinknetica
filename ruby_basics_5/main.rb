@@ -103,6 +103,12 @@ class Main
   def show_trains_list_to_station
     station = select_station
     puts "На выбранной станции #{station} следующие поезда"
+    # Вариант без передачи блока в метод
+    # station.list_train.each do |train|
+    #   puts "Номер поезда #{train.train_number} тип поезда #{train.type_of_train}"
+    # end
+
+    # Вариант с передачей блока в метод trains_to_station
     station.trains_to_station do |train, index|
       puts "Индекс #{index} | Номер #{train.train_number} Тип #{train.type_of_train}"
     end
