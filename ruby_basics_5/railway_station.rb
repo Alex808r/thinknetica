@@ -7,6 +7,10 @@ class RailwayStation
     @list_train = []
   end
 
+  def trains_to_station(&lambda)
+    @list_train.each_with_index(&lambda)
+  end
+
   def take_a_train(train)
     @list_train.push(train)
   end
