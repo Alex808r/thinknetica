@@ -61,4 +61,8 @@ class Train
   private
   # сделаем недоступным изменения скорости и количества вагонов
   attr_writer :speed, :wagons
+
+  # def speed_zero?
+  #   self.speed.zero?
+  # end
 end
