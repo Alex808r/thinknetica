@@ -72,7 +72,7 @@ class Main
   def create_train
     print "Введите номер поезда: "
     number = gets.strip
-    print "Введите тип поезда(1 - cargo/ 2 - passenger): "
+    print "Введите тип поезда(1 - cargo / 2 - passenger): "
     type = gets.strip
     type == "1" ? @trains.push(CargoTrain.new(number)) : @trains.push(PassengerTrain.new(number))
     puts "Создан поезд #{@trains.last}"
@@ -81,7 +81,7 @@ class Main
 
   def stations_list(stations)
     stations.each_with_index do |station, index|
-      puts "Индекс станции: #{index} | Наименование стацнии #{station.name}"
+      puts "Индекс станции: #{index} | Наименование станции: #{station.name}"
     end
   end
 
@@ -91,8 +91,8 @@ class Main
 
   def trains_list
     @trains.each_with_index do |train, index|
-      puts "Индекс: #{index}, Поезд: #{train}"
-      p @trains
+      puts "Индекс: #{index} | Поезд: #{train}"
+        # @trains
     end
   end
 
@@ -117,14 +117,14 @@ class Main
   def create_route
     if @stations.size >= 2
       "Списко всех станций: #{stations_list(@stations)}"
-      print "Введите начальную станцию(номер): "
+      print "Введите начальную станцию(индекс): "
       first_station = gets.to_i
-      print "Введите конечную станцию(номер): "
+      print "Введите конечную станцию(индекс): "
       last_station = gets.to_i
       @routes.push(Route.new(@stations[first_station], @stations[last_station]))
       @routes.last
     else
-      puts "У вас должно быть минимум 2 станции чтобы создать маршрут"
+      puts "У вас должно быть минимум 2 станции, чтобы создать маршрут"
       nil
     end
   end
@@ -157,6 +157,8 @@ class Main
 
   def add_station_to_route(route)
     route.add_station(select_station)
+    # puts "Маршрут после изменеия "
+    # stations_list(route.stations)
   end
 
   def delete_station_to_route(route)
@@ -167,6 +169,8 @@ class Main
       puts "Какую станцию удалить?"
       stations_list(route.stations)
       route.delete_station(route.stations[gets.strip.to_i])
+      # puts "Маршрут после изменеия "
+      # stations_list(route.stations)
     end
   end
 
@@ -180,7 +184,7 @@ class Main
 
   def select_train
     @trains.each_with_index do |train, index|
-      puts "Индекс поезда #{index} поезд #{train}"
+      puts "Индекс поезда #{index} | поезд #{train}"
     end
     print "Введите индекс поезда: "
     @trains[gets.strip.to_i]
