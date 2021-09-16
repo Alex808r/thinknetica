@@ -5,13 +5,14 @@ require_relative "cargo_wagon"
 require_relative "cargo_train"
 require_relative "passenger_wagon"
 require_relative "passenger_train"
-
+require_relative "wagon"
 class Main
 
   def initialize
     @stations = []
     @trains = []
     @routes = []
+
     user_choice
   end
 
@@ -48,6 +49,10 @@ class Main
       when '3' then create_route
       when '4' then change_route
       when '5' then set_route_to_train
+      when '6' then join_a_wagon
+      when '7' then delete_a_wagon
+      when '8' then move_next_station
+      when '9' then move_back_station
       when '10' then show_stations_list
       when '11' then show_trains_list
       when '12' then show_trains_list_to_station
@@ -87,6 +92,7 @@ class Main
   def trains_list
     @trains.each_with_index do |train, index|
       puts "Индекс: #{index}, Поезд: #{train}"
+      p @trains
     end
   end
 
@@ -183,6 +189,34 @@ class Main
     end
   end
 
+  def join_a_wagon
+    train = select_train
+    puts "Введите номер вагона"
+    number_wagon = gets.strip
+    case train.type_of_train
+    when "cargo"     then train.take_wagon(CargoWagon.new(number_wagon))
+    when "passenger" then train.take_wagon(PassengerWagon.new(number_wagon))
+    end
+  end
+
+  def delete_a_wagon
+    train = select_train
+    if train.wagons.empty?
+      puts "У поезда нет вагонов"
+      nil
+    else
+      train.drop_wagon
+      puts train.wagons.to_s
+    end
+  end
+
+  def move_next_station
+    select_train.move_forward
+  end
+
+  def move_back_station
+    select_train.move_bakward
+  end
 
 end
 
