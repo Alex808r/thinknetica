@@ -17,11 +17,13 @@ class Train
   end
 
   def take_wagon(wagon)
-    @wagons.push(wagon) if wagon.type == @type_of_train && @speed == 0
+    #@wagons.push(wagon) if wagon.type == @type_of_train && @speed == 0
+    @wagons.push(wagon) if wagon.type == @type_of_train && self.speed.zero?
   end
 
   def drop_wagon
-    @wagons.pop
+    # @wagons.pop if @speed == 0 или
+    @wagons.pop if self.speed.zero?
   end
 
   def take_route(route)
