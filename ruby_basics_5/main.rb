@@ -217,7 +217,6 @@ class Main
   def move_back_station
     select_train.move_bakward
   end
-
 end
 
 a = Main.new
