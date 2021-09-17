@@ -14,6 +14,8 @@ module InstanceCounter
     end
   end
 
+  protected # так как метод наследуется подклассами
+
   module InstanceMethods
     def register_instance
       self.class.instances += 1
