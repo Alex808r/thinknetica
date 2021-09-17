@@ -1,4 +1,7 @@
+require_relative "module_company"
+
 class Train
+  include Company
 
   attr_reader :type_of_train, :current_route, :current_station, :wagons, :train_number, :speed
 

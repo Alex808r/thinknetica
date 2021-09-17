@@ -16,6 +16,10 @@ kirov    = RailwayStation.new('Kirov')
 train_1  = PassengerTrain.new('1A' )
 train_2  = CargoTrain.new('2B')
 
+# train_1.company_name = "name"
+# train_1.set_company_name = 'name'
+# train_1.get_company_name
+
 # Вагоны
  passenger_1 = PassengerWagon.new(11)
 # passenger_2 = PassengerWagon.new(22)
@@ -39,16 +43,16 @@ train_2  = CargoTrain.new('2B')
 # kazan.list_train
 #
 # Добавим вагоны при текущей скорости 10
-p train_1.speed_up(10)
-p train_1.speed
-p train_1.take_wagon(passenger_1)   # тут получим nil так как у поезда скорость > 0
-p train_1.speed_stop
+train_1.speed_up(10)
+train_1.speed
+train_1.take_wagon(passenger_1)   # тут получим nil так как у поезда скорость > 0
+train_1.speed_stop
 # train_1.take_wagon(cargo_1)       # тут получим nil так как вагон не того типа
-p train_1.take_wagon(passenger_1)
+train_1.take_wagon(passenger_1)
 # train_1.take_wagon(passenger_2)
 # train_1.wagons.count                    # получим 2 так как 2 вагона добавлены к поезду
-p train_1.drop_wagon
-p train_1.wagons
+train_1.drop_wagon
+train_1.wagons
 # Узнаем следующую станцию. Должна быть Новгород.
 # train_1.next_station.name
 #
