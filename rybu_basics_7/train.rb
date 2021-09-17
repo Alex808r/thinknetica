@@ -18,7 +18,8 @@ class Train
     # train.empty? ?  nil : train
   end
 
-  attr_reader :type_of_train, :current_route, :current_station, :wagons, :train_number, :speed
+  #attr_reader :type_of_train, :current_route, :current_station, :wagons, :train_number, :speed
+  attr_accessor :type_of_train, :current_route, :current_station, :wagons, :train_number, :speed
 
   def initialize(train_number)
     @speed = 0
@@ -26,6 +27,23 @@ class Train
     @train_number = train_number
     @@all_trains[self.train_number] = self
     register_instance
+    validate!
+  end
+
+  protected
+
+  def validate!
+    raise "Номер не может быть короче 3 символов" if train_number.to_s.size < 3
+    raise "Номер не может быть пустым" if train_number.empty?
+  end
+
+  public 
+
+  def valid?
+    validate!
+    true
+  rescue
+    false
   end
 
   def speed_up(speed)
@@ -86,3 +104,8 @@ class Train
   #   self.speed.zero?
   # end
 end
+
+
+train = Train.new("")
+# train.train_number = '1'
+# train.validate!

@@ -8,4 +8,9 @@ class Wagon
     @number_wagon = number_wagon
   end
 
+  protected
+  def validate!
+    raise "Номер вагона не может быть пустым" if @number_wagon.empty?
+  end
+
 end

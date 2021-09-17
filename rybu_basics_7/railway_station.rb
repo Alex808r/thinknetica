@@ -16,6 +16,20 @@ class RailwayStation
     @list_train = []
     @@all_stations.push(self)
     register_instance
+    vatidate!
+  end
+
+  protected
+  def vatidate!
+    raise "Наименование станции не может быть пустым" if @name.empty?
+  end
+
+  public
+  def valid?
+    validate!
+    true
+  rescue
+    false
   end
 
   def trains_to_station(&lambda)

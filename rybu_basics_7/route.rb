@@ -13,6 +13,13 @@ class Route
     register_instance
   end
 
+  def valid?
+    validate!
+    true
+  rescue
+    false
+  end
+
   def add_station(station)
     @stations.insert(-2, station)
   end
@@ -21,4 +28,9 @@ class Route
     @stations.delete(station) if @stations.include?(station)
   end
 
+  private
+
+  def validate!
+    raise "Маршрут должен иметь начальную и конечную станцию" if first_station.empty? || @last_station.empty?
+  end
 end

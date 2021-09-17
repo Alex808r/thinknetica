@@ -14,31 +14,31 @@ novgorod = RailwayStation.new('Novgorod')
 moscow   = RailwayStation.new('Moscow')
 kirov    = RailwayStation.new('Kirov')
 
-RailwayStation.all
-RailwayStation.instances
+# RailwayStation.all
+# RailwayStation.instances
 
 # Поезда:
-train_1  = PassengerTrain.new('1A')
-train_2  = CargoTrain.new('2B')
-Train.find('1A')
-
-Train.instances
-PassengerTrain.instances
-CargoTrain.instances
+# train_1  = PassengerTrain.new('1A')
+# train_2  = CargoTrain.new('2B')
+# Train.find('1A')
+#
+# Train.instances
+# PassengerTrain.instances
+# CargoTrain.instances
 
 # train_1.company_name = "name"
 # train_1.set_company_name = 'name'
 # train_1.get_company_name
 
 # Вагоны
-passenger_1 = PassengerWagon.new(11)
-passenger_2 = PassengerWagon.new(22)
-cargo_1 = CargoWagon.new(33)
-cargo_2 = CargoWagon.new(44)
+# passenger_1 = PassengerWagon.new(11)
+# passenger_2 = PassengerWagon.new(22)
+# cargo_1 = CargoWagon.new(33)
+# cargo_2 = CargoWagon.new(44)
 
 # Маршруты:
-ro = Route.new(kazan, kirov)
-Route.instances
+# ro = Route.new(kazan, kirov)
+# Route.instances
 
 # Добавим 2 промежуточные станции в маршрут:
 # ro.add_station(novgorod)
