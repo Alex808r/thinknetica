@@ -18,7 +18,7 @@ RailwayStation.all
 RailwayStation.instances
 
 # Поезда:
-train_1  = PassengerTrain.new('1A' )
+train_1  = PassengerTrain.new('1A')
 train_2  = CargoTrain.new('2B')
 Train.find('1A')
 
