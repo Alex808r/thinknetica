@@ -12,11 +12,13 @@ novgorod = RailwayStation.new('Novgorod')
 moscow   = RailwayStation.new('Moscow')
 kirov    = RailwayStation.new('Kirov')
 
-p RailwayStation.all
+RailwayStation.all
 
 # Поезда:
 train_1  = PassengerTrain.new('1A' )
 train_2  = CargoTrain.new('2B')
+
+p Train.find('1')
 
 # train_1.company_name = "name"
 # train_1.set_company_name = 'name'

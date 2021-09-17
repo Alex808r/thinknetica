@@ -2,12 +2,23 @@ require_relative "module_company"
 
 class Train
   include Company
+
+  @@all_trains = []
+  def Train.find(by_train_number)
+    @@all_trains.find{|train| train.train_number == by_train_number}
+    
+    # Аналогичный вариант
+    # train = @@all_trains.find_all{|train| train.train_number == train_number }
+    # train.empty? ?  nil : train
+  end
+
   attr_reader :type_of_train, :current_route, :current_station, :wagons, :train_number, :speed
 
   def initialize(train_number)
     @speed = 0
     @wagons = []
     @train_number = train_number
+    @@all_trains.push(self)
   end
 
   def speed_up(speed)
