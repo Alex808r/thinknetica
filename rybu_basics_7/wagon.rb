@@ -6,6 +6,14 @@ class Wagon
 
   def initialize(number_wagon)
     @number_wagon = number_wagon
+    validate!
+  end
+
+  def valid?
+    validate!
+    true
+  rescue
+    false
   end
 
   protected

@@ -37,7 +37,7 @@ class Train
     raise "Номер не может быть пустым" if train_number.empty?
   end
 
-  public 
+  public
 
   def valid?
     validate!
