@@ -1,12 +1,14 @@
 require_relative "module_company"
+require_relative "module_instance_counter"
 
 class Train
   include Company
+  include InstanceCounter
 
   @@all_trains = []
-  def Train.find(by_train_number)
-    @@all_trains.find{|train| train.train_number == by_train_number}
-    
+  def Train.find(by_number)
+    @@all_trains.find{|train| train.train_number == by_number}
+
     # Аналогичный вариант
     # train = @@all_trains.find_all{|train| train.train_number == train_number }
     # train.empty? ?  nil : train
@@ -19,6 +21,7 @@ class Train
     @wagons = []
     @train_number = train_number
     @@all_trains.push(self)
+    register_instance
   end
 
   def speed_up(speed)

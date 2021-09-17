@@ -1,4 +1,7 @@
+require_relative "module_instance_counter"
+
 class RailwayStation
+  include InstanceCounter
 
   @@all_stations = []
 
@@ -12,6 +15,7 @@ class RailwayStation
     @name = name
     @list_train = []
     @@all_stations.push(self)
+    register_instance
   end
 
   def trains_to_station(&lambda)
