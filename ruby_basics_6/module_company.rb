@@ -1,12 +1,14 @@
 module Company
-  # attr_accessor :company_name
 
-  def get_company_name
-    @company_name
-  end
+  attr_accessor :company_name
 
-  def set_company_name=(by_name)
-    @company_name = by_name
-  end
+  # Аналогичная запись
+  # def get_company_name
+  #   @company_name
+  # end
+  #
+  # def set_company_name=(by_name)
+  #   @company_name = by_name
+  # end
 
 end
