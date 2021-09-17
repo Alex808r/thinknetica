@@ -5,10 +5,14 @@ class Train
   include Company
   include InstanceCounter
 
-  @@all_trains = []
-  def Train.find(by_number)
-    @@all_trains.find{|train| train.train_number == by_number}
+  # @@all_trains = [] - до ревью был массив, но хеш быстрее
 
+  @@all_trains = {}
+  def self.find(by_number) # аналогичная запись Train.find(by_number) - лучше self.find
+    @@all_trains[by_number]
+
+    # Если @@all_trains - массив
+    # @@all_trains.find{|train| train.train_number == by_number}
     # Аналогичный вариант
     # train = @@all_trains.find_all{|train| train.train_number == train_number }
     # train.empty? ?  nil : train
@@ -20,7 +24,7 @@ class Train
     @speed = 0
     @wagons = []
     @train_number = train_number
-    @@all_trains.push(self)
+    @@all_trains[self.train_number] = self
     register_instance
   end
 
