@@ -12,6 +12,8 @@ novgorod = RailwayStation.new('Novgorod')
 moscow   = RailwayStation.new('Moscow')
 kirov    = RailwayStation.new('Kirov')
 
+p RailwayStation.all
+
 # Поезда:
 train_1  = PassengerTrain.new('1A' )
 train_2  = CargoTrain.new('2B')

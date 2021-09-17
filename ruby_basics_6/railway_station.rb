@@ -1,10 +1,17 @@
 class RailwayStation
 
+  @@all_stations = []
+
+  def RailwayStation.all  # или self.all или class << self  end
+    @@all_stations
+  end
+
   attr_reader :name, :list_train
 
   def initialize(name)
     @name = name
     @list_train = []
+    @@all_stations.push(self)
   end
 
   def trains_to_station(&lambda)
