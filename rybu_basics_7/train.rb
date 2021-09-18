@@ -18,8 +18,8 @@ class Train
     # train.empty? ?  nil : train
   end
 
-  #attr_reader :type_of_train, :current_route, :current_station, :wagons, :train_number, :speed
-  attr_accessor :type_of_train, :current_route, :current_station, :wagons, :train_number, :speed
+  VALID_NUMBER = /[\w\d]{3}-?[\w\d]{0,2}/
+  attr_reader :type_of_train, :current_route, :current_station, :wagons, :train_number, :speed
 
   def initialize(train_number)
     @speed = 0
@@ -33,8 +33,11 @@ class Train
   protected
 
   def validate!
-    raise "Номер не может быть короче 3 символов" if train_number.to_s.size < 3
-    raise "Номер не может быть пустым" if train_number.empty?
+    raise "Не вырный формат номера" if @train_number !~ VALID_NUMBER
+
+    # raise "Не верный тип поезда введите 1 или 2" if @type_of_train != 'cargo' || @type_of_train != 'passenger'
+    # raise "Номер не может быть короче 3 символов" if train_number.to_s.size < 3
+    # raise "Номер не может быть пустым" if train_number.empty?
   end
 
   public
@@ -105,7 +108,7 @@ class Train
   # end
 end
 
-
-train = Train.new("")
+#
+# train = Train.new("")
 # train.train_number = '1'
 # train.validate!

@@ -70,11 +70,18 @@ class Main
   end
 
   def create_train
+    puts "Требования к номеру поезда три буквы или цифры в любом порядке, необязательный дефис" \
+           "(может быть, а может нет) и еще 2 буквы или цифры после дефиса"
     print "Введите номер поезда: "
+    begin
     number = gets.strip
     print "Введите тип поезда(1 - cargo / 2 - passenger): "
     type = gets.strip
     type == "1" ? @trains.push(CargoTrain.new(number)) : @trains.push(PassengerTrain.new(number))
+  rescue StandardError => e
+    puts e
+  retry
+    end
     puts "Создан поезд #{@trains.last}"
     @trains.last
   end
