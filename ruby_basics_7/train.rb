@@ -49,7 +49,8 @@ class Train
   end
 
   def speed_up(speed)
-    @speed += speed if speed > 0
+    # @speed += speed if speed > 0
+    @speed += speed if speed.positive?
   end
 
   def speed_stop
