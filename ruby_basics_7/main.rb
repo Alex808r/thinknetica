@@ -87,9 +87,8 @@ class Main
       type == "1" ? @trains.push(CargoTrain.new(number)) : @trains.push(PassengerTrain.new(number))
       rescue ValidationError => e
         puts e
-    retry
+      retry
     end
-    type == "1" ? @trains.push(CargoTrain.new(number)) : @trains.push(PassengerTrain.new(number))
     puts "Создан поезд #{@trains.last}"
     @trains.last
   end

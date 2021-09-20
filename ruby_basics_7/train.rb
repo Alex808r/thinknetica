@@ -27,15 +27,18 @@ class Train
     @wagons = []
     @train_number = train_number
     @@all_trains[self.train_number] = self
-    register_instance
+
     validate!
+
+    register_instance
   end
 
   protected
 
   def validate!
     raise ValidationError, "Не верный формат номера" if @train_number !~ VALID_NUMBER
-    raise ValidationError, "Не верный тип поезда введите 1 или 2" if @type_of_train != 'cargo' #|| @type_of_train != 'passenger'
+    raise ValidationError, "Не верный тип поезда введите 1 или 2" if %w[cargo passenger].include?(@type_of_train)
+    # raise ValidationError, "Не верный тип поезда введите 1 или 2" if @type_of_train != 'cargo' || @type_of_train != 'passenger'
     # raise "Номер не может быть короче 3 символов" if train_number.to_s.size < 3
     # raise "Номер не может быть пустым" if train_number.empty?
   end
