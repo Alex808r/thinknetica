@@ -9,4 +9,3 @@ class CargoTrain < Train
   end
 end
 
-train = CargoTrain.new('123123')
