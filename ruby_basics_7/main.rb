@@ -37,6 +37,8 @@ class Main
       when '11' then show_trains_list
       when '12' then show_trains_list_to_station
       when '13' then show_routes_list
+      when '14' then show_the_wagons_by_the_train
+      when '15' then take_place
       end
     end
   end
@@ -58,7 +60,9 @@ class Main
       '10 Посмотреть список станций',
       '11 Посмотреть весь список поездов',
       '12 Посмотреть список поездов на станции',
-      '13 Посмотреть список маршрутов'
+      '13 Посмотреть список маршрутов',
+      '14 Посмотреть список вагонов у поезда',
+      '15 Занять место в вагоне'
     ]
     main_menu.each { |menu| puts menu }
   end
@@ -219,9 +223,11 @@ class Main
     train = select_train
     puts "Введите номер вагона"
     number_wagon = gets.strip
+    puts train.type_of_train == "cargo" ? "Введите объем грузового вагона " : "Введите количество мест "
+    place_or_volume = gets.strip
     case train.type_of_train
-    when "cargo"     then train.take_wagon(CargoWagon.new(number_wagon))
-    when "passenger" then train.take_wagon(PassengerWagon.new(number_wagon))
+    when "cargo"     then train.take_wagon(CargoWagon.new(number_wagon, place_or_volume))
+    when "passenger" then train.take_wagon(PassengerWagon.new(number_wagon, place_or_volume))
     end
   end
 
@@ -233,6 +239,39 @@ class Main
     else
       train.drop_wagon
       puts train.wagons.to_s
+    end
+  end
+
+  def show_the_wagons_by_the_train
+    train = select_train
+    train.wagons_to_train do |wagon, index|
+      if wagon.type == 'cargo'
+        puts "Индекс вагона #{index} | Номер #{wagon.number_wagon} Тип #{wagon.type}" \
+                 " Объем вагона #{wagon.volume_wagon} занято #{wagon.occupied_volume}"
+      else
+        puts "Индекс вагона #{index} | Номер #{wagon.number_wagon} Тип #{wagon.type}" \
+                 " Мест в вагоне #{wagon.number_of_seats} из них занято #{wagon.occupied_place}"
+      end
+    end
+  end
+
+  def select_wagon(train)
+    train.wagons.each_with_index do |wagon, index|
+      puts "Индекс #{index} | Номер #{wagon.number_wagon}"
+    end
+    print "Введите индекс вагона "
+    train.wagons[gets.strip.to_i]
+  end
+
+  def take_place
+    train = select_train
+    wagon = select_wagon(train)
+    if train.type_of_train == "cargo"
+      puts "Какой объем занять? "
+      wagon.take_up_volume(gets.strip.to_i)
+    else
+      puts "Занято одно место "
+      wagon.take_the_place
     end
   end
 

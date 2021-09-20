@@ -53,6 +53,10 @@ class Train
     false
   end
 
+  def wagons_to_train(&lambda)
+    @wagons.each_with_index(&lambda)
+  end
+
   def speed_up(speed)
     # @speed += speed if speed > 0
     @speed += speed if speed.positive?
