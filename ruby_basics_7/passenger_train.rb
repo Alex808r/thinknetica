@@ -1,4 +1,6 @@
 require_relative "train"
+require_relative "validation_error"
+
 
 class PassengerTrain < Train
   def initialize(number)

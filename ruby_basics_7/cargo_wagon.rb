@@ -8,3 +8,5 @@ class CargoWagon < Wagon
     super(number_wagon)
   end
 end
+
+

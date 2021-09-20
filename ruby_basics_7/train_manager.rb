@@ -6,13 +6,15 @@ require_relative "cargo_train"
 require_relative "passenger_wagon"
 require_relative "passenger_train"
 require_relative "module_instance_counter"
+require_relative "validation_error"
 
 
 # Станции:
-kazan    = RailwayStation.new('Kazan')
-novgorod = RailwayStation.new('Novgorod')
-moscow   = RailwayStation.new('Moscow')
-kirov    = RailwayStation.new('Kirov')
+# kazan    = RailwayStation.new('Kazan')
+# novgorod = RailwayStation.new('Novgorod')
+# moscow   = RailwayStation.new('Moscow')
+# kirov    = RailwayStation.new('Kirov')
+
 
 # RailwayStation.all
 # RailwayStation.instances

@@ -1,4 +1,5 @@
 require_relative "module_instance_counter"
+require_relative "validation_error"
 
 class RailwayStation
   include InstanceCounter
@@ -9,19 +10,19 @@ class RailwayStation
     @@all_stations
   end
 
-  attr_reader :name, :list_train
+   attr_reader :name, :list_train
 
   def initialize(name)
     @name = name
     @list_train = []
     @@all_stations.push(self)
     register_instance
-    vatidate!
+    validate!
   end
 
   protected
-  def vatidate!
-    raise "Наименование станции не может быть пустым" if @name.empty?
+  def validate!
+    raise ValidationError, "Наименование станции не может быть пустым" if @name.empty?
   end
 
   public

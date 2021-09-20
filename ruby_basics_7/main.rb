@@ -6,6 +6,8 @@ require_relative "cargo_train"
 require_relative "passenger_wagon"
 require_relative "passenger_train"
 require_relative "wagon"
+require_relative "validation_error"
+
 class Main
 
   def initialize
@@ -62,26 +64,32 @@ class Main
   end
 
   def create_railway_station
-    print "Введите наименование станции: "
-    name = gets.strip.capitalize
-    @stations.push(RailwayStation.new(name))
+    begin
+      print "Введите наименование станции: "
+      name = gets.strip.capitalize
+      @stations.push(RailwayStation.new(name))
+    rescue ValidationError => e
+      puts e
+    retry
+    end
     puts "Создана станция: #{@stations.last.name}"
     @stations.last
   end
 
   def create_train
-    puts "Требования к номеру поезда три буквы или цифры в любом порядке, необязательный дефис" \
-           "(может быть, а может нет) и еще 2 буквы или цифры после дефиса"
-    print "Введите номер поезда: "
     begin
-    number = gets.strip
-    print "Введите тип поезда(1 - cargo / 2 - passenger): "
-    type = gets.strip
-    type == "1" ? @trains.push(CargoTrain.new(number)) : @trains.push(PassengerTrain.new(number))
-  rescue StandardError => e
-    puts e
-  retry
+      puts "Требования к номеру поезда три буквы или цифры в любом порядке, необязательный дефис" \
+             "(может быть, а может нет) и еще 2 буквы или цифры после дефиса"
+      print "Введите номер поезда: "
+      number = gets.strip
+      print "Введите тип поезда(1 - cargo / 2 - passenger): "
+      type = gets.strip
+      type == "1" ? @trains.push(CargoTrain.new(number)) : @trains.push(PassengerTrain.new(number))
+      rescue ValidationError => e
+        puts e
+    retry
     end
+    type == "1" ? @trains.push(CargoTrain.new(number)) : @trains.push(PassengerTrain.new(number))
     puts "Создан поезд #{@trains.last}"
     @trains.last
   end

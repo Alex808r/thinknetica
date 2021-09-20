@@ -1,4 +1,6 @@
 require_relative "train"
+require_relative "validation_error"
+
 
 class CargoTrain < Train
   def initialize(number)
@@ -6,3 +8,5 @@ class CargoTrain < Train
     @type_of_train = 'cargo'
   end
 end
+
+train = CargoTrain.new('123123')

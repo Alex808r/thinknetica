@@ -1,5 +1,6 @@
 require_relative "module_company"
 require_relative "module_instance_counter"
+require_relative "validation_error"
 
 class Train
   include Company
@@ -33,8 +34,8 @@ class Train
   protected
 
   def validate!
-    raise "Не вырный формат номера" if @train_number !~ VALID_NUMBER
-    raise "Не верный тип поезда введите 1 или 2" if @type_of_train != 'cargo' || @type_of_train != 'passenger'
+    raise ValidationError, "Не верный формат номера" if @train_number !~ VALID_NUMBER
+    raise ValidationError, "Не верный тип поезда введите 1 или 2" if @type_of_train != 'cargo' #|| @type_of_train != 'passenger'
     # raise "Номер не может быть короче 3 символов" if train_number.to_s.size < 3
     # raise "Номер не может быть пустым" if train_number.empty?
   end
@@ -108,7 +109,3 @@ class Train
   # end
 end
 
-#
-# train = Train.new("")
-# train.train_number = '1'
-# train.validate!
