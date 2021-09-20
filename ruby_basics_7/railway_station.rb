@@ -59,3 +59,7 @@ class RailwayStation
   attr_writer :list_train
 
 end
+
+#
+# statoin = RailwayStation.new("123")
+# p statoin.valid?

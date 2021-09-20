@@ -77,6 +77,7 @@ class Main
   end
 
   def create_train
+    #count = 0
     begin
       puts "Требования к номеру поезда три буквы или цифры в любом порядке, необязательный дефис" \
              "(может быть, а может нет) и еще 2 буквы или цифры после дефиса"
@@ -87,7 +88,8 @@ class Main
       type == "1" ? @trains.push(CargoTrain.new(number)) : @trains.push(PassengerTrain.new(number))
       rescue ValidationError => e
         puts e
-      retry
+        #count += 1
+      retry #if count < 3
     end
     puts "Создан поезд #{@trains.last}"
     @trains.last

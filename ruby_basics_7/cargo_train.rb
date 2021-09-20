@@ -9,3 +9,5 @@ class CargoTrain < Train
   end
 end
 
+# p train = CargoTrain.new('12345')
+# p train.valid?
