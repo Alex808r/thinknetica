@@ -1,8 +1,12 @@
-module InstanceCounter
+# frozen_string_literal: true
+# rubocop:disable all
 
+
+
+module InstanceCounter
   def self.included(method)
     method.extend ClassMethods
-      #method.send :include, InstanceMethods
+    # method.send :include, InstanceMethods
     method.include InstanceMethods
   end
 
@@ -14,12 +18,10 @@ module InstanceCounter
     end
   end
 
-  protected # так как метод наследуется подклассами
-
   module InstanceMethods
     def register_instance
       self.class.instances += 1
     end
   end
-
 end
+# rubocop:anable all

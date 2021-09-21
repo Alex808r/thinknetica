@@ -1,6 +1,8 @@
-require_relative "module_company"
-require_relative "module_instance_counter"
-require_relative "validation_error"
+# frozen_string_literal: true
+
+require_relative 'module_company'
+require_relative 'module_instance_counter'
+require_relative 'validation_error'
 
 class Train
   include Company
@@ -9,7 +11,8 @@ class Train
   # @@all_trains = [] - до ревью был массив, но хеш быстрее
 
   @@all_trains = {}
-  def self.find(by_number) # аналогичная запись Train.find(by_number) - лучше self.find
+  # аналогичная запись Train.find(by_number) - лучше self.find
+  def self.find(by_number)
     @@all_trains[by_number]
 
     # Если @@all_trains - массив
@@ -19,7 +22,7 @@ class Train
     # train.empty? ?  nil : train
   end
 
-  VALID_NUMBER = /^[\w\d]{3}-?[\w\d]{0,2}/i
+  VALID_NUMBER = /^[\w\d]{3}-?[\w\d]{0,2}/i.freeze
   attr_reader :type_of_train, :current_route, :current_station, :wagons, :train_number, :speed
 
   def initialize(train_number)
@@ -36,8 +39,8 @@ class Train
   protected
 
   def validate!
-    raise ValidationError, "Не верный формат номера" if @train_number !~ VALID_NUMBER
-      #raise ValidationError, "Не верный тип поезда введите 1 или 2" if %w[cargo passenger].include?(@type_of_train)
+    raise ValidationError, 'Не верный формат номера' if @train_number !~ VALID_NUMBER
+    # raise ValidationError, "Не верный тип поезда введите 1 или 2" if %w[cargo passenger].include?(@type_of_train)
 
     # raise ValidationError, "Не верный тип поезда введите 1 или 2" if @type_of_train != 'cargo' || @type_of_train != 'passenger'
     # raise "Номер не может быть короче 3 символов" if train_number.to_s.size < 3
@@ -49,7 +52,7 @@ class Train
   def valid?
     validate!
     true
-  rescue
+  rescue StandardError
     false
   end
 
@@ -67,13 +70,13 @@ class Train
   end
 
   def take_wagon(wagon)
-    #@wagons.push(wagon) if wagon.type == @type_of_train && @speed == 0
-    @wagons.push(wagon) if wagon.type == @type_of_train && self.speed.zero?
+    # @wagons.push(wagon) if wagon.type == @type_of_train && @speed == 0
+    @wagons.push(wagon) if wagon.type == @type_of_train && speed.zero?
   end
 
   def drop_wagon
     # @wagons.pop if @speed == 0 или
-    @wagons.pop if self.speed.zero?
+    @wagons.pop if speed.zero?
   end
 
   def take_route(route)
@@ -84,6 +87,7 @@ class Train
 
   def move_forward
     return unless next_station
+
     @current_station.send_a_train(self)
     @current_station = next_station
     @current_station.take_a_train(self)
@@ -91,24 +95,26 @@ class Train
 
   def move_bakward
     return unless previous_station
+
     @current_station.send_a_train(self)
     @current_station = previous_station
     @current_station.take_a_train(self)
   end
-
+  # rubocop:disable all
   def next_station
     if @current_route.stations.index(@current_station) != @current_route.stations.last
-        @current_route.stations[@current_route.stations.index(@current_station)+1]
+      @current_route.stations[@current_route.stations.index(@current_station) + 1]
     end
   end
 
   def previous_station
     if @current_station != @current_route.stations[0]
-      @current_route.stations[@current_route.stations.index(@current_station)-1]
+      @current_route.stations[@current_route.stations.index(@current_station) - 1]
     end
   end
-
+  # rubocop:anable all
   private
+
   # сделаем недоступным изменения скорости и количества вагонов
   attr_writer :speed, :wagons
 
@@ -116,4 +122,3 @@ class Train
   #   self.speed.zero?
   # end
 end
-

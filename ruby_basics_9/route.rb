@@ -1,4 +1,6 @@
-require_relative "module_instance_counter"
+# frozen_string_literal: true
+
+require_relative 'module_instance_counter'
 
 class Route
   include InstanceCounter
@@ -16,7 +18,7 @@ class Route
   def valid?
     validate!
     true
-  rescue
+  rescue StandardError
     false
   end
 
@@ -31,6 +33,6 @@ class Route
   private
 
   def validate!
-    raise "Маршрут должен иметь начальную и конечную станцию" if first_station.empty? || @last_station.empty?
+    raise 'Маршрут должен иметь начальную и конечную станцию' if first_station.empty? || @last_station.empty?
   end
 end

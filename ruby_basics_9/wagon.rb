@@ -1,4 +1,6 @@
-require_relative "module_company"
+# frozen_string_literal: true
+
+require_relative 'module_company'
 
 class Wagon
   include Company
@@ -12,13 +14,13 @@ class Wagon
   def valid?
     validate!
     true
-  rescue
+  rescue StandardError
     false
   end
 
   protected
-  def validate!
-    raise ValidationError, "Номер вагона не может быть пустым" if @number_wagon.empty?
-  end
 
+  def validate!
+    raise ValidationError, 'Номер вагона не может быть пустым' if @number_wagon.empty?
+  end
 end
