@@ -38,7 +38,7 @@ class Main
       when '12' then show_trains_list_to_station
       when '13' then show_routes_list
       when '14' then show_the_wagons_by_the_train
-      when '15' then take_place
+      when '15' then take_volume_or_place
       end
     end
   end
@@ -274,6 +274,8 @@ class Main
       wagon.take_the_place
     end
   end
+
+  alias_method :take_volume_or_place, :take_place
 
   def move_next_station
     select_train.move_forward
