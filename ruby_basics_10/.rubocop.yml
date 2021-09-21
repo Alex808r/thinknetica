@@ -1,0 +1,16 @@
+AllCops:
+  Exclude:
+  - 'main.rb'
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+Style/Documentation:
+  Enabled: false
+
+Metrics/LineLength:
+  Max: 130
+
+Style/ClassVars:
+  Enabled: false
+
