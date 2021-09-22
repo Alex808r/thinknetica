@@ -3,10 +3,14 @@
 require_relative 'module_company'
 require_relative 'module_instance_counter'
 require_relative 'validation_error'
+require_relative 'accessors'
+require_relative 'module_validation'
 
 class Train
   include Company
   include InstanceCounter
+  include Accessors
+  include Validation
 
   # @@all_trains = [] - до ревью был массив, но хеш быстрее
 
@@ -23,29 +27,30 @@ class Train
   end
 
   VALID_NUMBER = /^[\w\d]{3}-?[\w\d]{0,2}/i.freeze
-  attr_reader :type_of_train, :current_route, :current_station, :wagons, :train_number, :speed
 
+  attr_reader :type_of_train, :current_route, :current_station, :wagons, :train_number, :speed
+  attr_accessor :speed, :train_number
+
+  validate :train_number, :presence
+  validate :train_number, :format, VALID_NUMBER
   def initialize(train_number)
     @speed = 0
     @wagons = []
     @train_number = train_number
     @@all_trains[self.train_number] = self
-
     validate!
-
     register_instance
   end
 
   protected
 
-  def validate!
-    raise ValidationError, 'Не верный формат номера' if @train_number !~ VALID_NUMBER
-    # raise ValidationError, "Не верный тип поезда введите 1 или 2" if %w[cargo passenger].include?(@type_of_train)
-
-    # raise ValidationError, "Не верный тип поезда введите 1 или 2" if @type_of_train != 'cargo' || @type_of_train != 'passenger'
-    # raise "Номер не может быть короче 3 символов" if train_number.to_s.size < 3
-    # raise "Номер не может быть пустым" if train_number.empty?
-  end
+  # def validate!
+  #   raise ValidationError, 'Не верный формат номера' if @train_number !~ VALID_NUMBER
+  #   # raise ValidationError, "Не верный тип поезда введите 1 или 2" if %w[cargo passenger].include?(@type_of_train)
+  #  #   # raise ValidationError, "Не верный тип поезда введите 1 или 2" if @type_of_train != 'cargo' || @type_of_train != 'passenger'
+  #   # raise "Номер не может быть короче 3 символов" if train_number.to_s.size < 3
+  #   # raise "Номер не может быть пустым" if train_number.empty?
+  # end
 
   public
 
@@ -122,3 +127,10 @@ class Train
   #   self.speed.zero?
   # end
 end
+
+# p Train.attr_accessor_with_history(:@new_number, :@name)
+# p t = Train.new('12345')
+# p t.instance_variable_get(:@new_number)
+# # p Train.strong_attr_accessor(:name, Train)
+# p t1 = Train.new('33333')
+# p t.instance_variable_get(:@name)

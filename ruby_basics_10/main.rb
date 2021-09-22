@@ -9,8 +9,11 @@ require_relative 'passenger_wagon'
 require_relative 'passenger_train'
 require_relative 'wagon'
 require_relative 'validation_error'
+require_relative 'module_validation'
+require_relative 'accessors'
 
 # rubocop:disable all
+
 class Main
   def initialize
     @stations = []

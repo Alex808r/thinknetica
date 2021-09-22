@@ -9,6 +9,7 @@ require_relative 'passenger_wagon'
 require_relative 'passenger_train'
 require_relative 'module_instance_counter'
 require_relative 'validation_error'
+require_relative 'module_validation'
 
 # Станции:
 # kazan    = RailwayStation.new('Kazan')
