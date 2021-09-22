@@ -16,6 +16,7 @@ class RailwayStation
   end
 
   attr_reader :name, :list_train
+
   validate :name, :presence
   validate :name, :name_length
 
@@ -27,13 +28,9 @@ class RailwayStation
     validate!
   end
 
-  protected
-
   # def validate!
   #   raise ValidationError, 'Наименование станции не может быть пустым' if @name.empty?
   # end
-
-  public
 
   def valid?
     validate!

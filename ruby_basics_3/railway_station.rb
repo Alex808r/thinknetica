@@ -1,5 +1,6 @@
-class RailwayStation
+# frozen_string_literal: true
 
+class RailwayStation
   attr_reader :name, :list_train
 
   def initialize(name)
@@ -12,16 +13,15 @@ class RailwayStation
   end
 
   def train_type_count(type)
-    @list_train.count { |train| train.type_of_train.eql?(type)  }
-    #@list_train.count { |train| train.type_of_train == type  }
+    @list_train.count { |train| train.type_of_train.eql?(type) }
+    # @list_train.count { |train| train.type_of_train == type  }
   end
 
   def train_type(type)
-    @list_train.select{|train| train.type_of_train == type}
+    @list_train.select { |train| train.type_of_train == type }
   end
 
   def send_a_train(train)
     @list_train.delete(train) if @list_train.include?(train)
   end
-
 end

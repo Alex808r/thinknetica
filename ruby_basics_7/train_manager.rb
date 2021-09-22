@@ -1,20 +1,20 @@
-require_relative "railway_station"
-require_relative "route"
-require_relative "train"
-require_relative "cargo_wagon"
-require_relative "cargo_train"
-require_relative "passenger_wagon"
-require_relative "passenger_train"
-require_relative "module_instance_counter"
-require_relative "validation_error"
+# frozen_string_literal: true
 
+require_relative 'railway_station'
+require_relative 'route'
+require_relative 'train'
+require_relative 'cargo_wagon'
+require_relative 'cargo_train'
+require_relative 'passenger_wagon'
+require_relative 'passenger_train'
+require_relative 'module_instance_counter'
+require_relative 'validation_error'
 
 # Станции:
 # kazan    = RailwayStation.new('Kazan')
 # novgorod = RailwayStation.new('Novgorod')
 # moscow   = RailwayStation.new('Moscow')
 # kirov    = RailwayStation.new('Kirov')
-
 
 # RailwayStation.all
 # RailwayStation.instances

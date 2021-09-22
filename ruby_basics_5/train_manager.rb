@@ -1,10 +1,12 @@
-require_relative "railway_station"
-require_relative "route"
-require_relative "train"
-require_relative "cargo_wagon"
-require_relative "cargo_train"
-require_relative "passenger_wagon"
-require_relative "passenger_train"
+# frozen_string_literal: true
+
+require_relative 'railway_station'
+require_relative 'route'
+require_relative 'train'
+require_relative 'cargo_wagon'
+require_relative 'cargo_train'
+require_relative 'passenger_wagon'
+require_relative 'passenger_train'
 
 # Станции:
 kazan    = RailwayStation.new('Kazan')
@@ -13,11 +15,11 @@ moscow   = RailwayStation.new('Moscow')
 kirov    = RailwayStation.new('Kirov')
 
 # Поезда:
-train_1  = PassengerTrain.new('1A' )
+train_1  = PassengerTrain.new('1A')
 train_2  = CargoTrain.new('2B')
 
 # Вагоны
- passenger_1 = PassengerWagon.new(11)
+passenger_1 = PassengerWagon.new(11)
 # passenger_2 = PassengerWagon.new(22)
 # cargo_1 = CargoWagon.new(33)
 # cargo_2 = CargoWagon.new(44)
@@ -41,7 +43,7 @@ train_2  = CargoTrain.new('2B')
 # Добавим вагоны при текущей скорости 10
 p train_1.speed_up(10)
 p train_1.speed
-p train_1.take_wagon(passenger_1)   # тут получим nil так как у поезда скорость > 0
+p train_1.take_wagon(passenger_1) # тут получим nil так как у поезда скорость > 0
 p train_1.speed_stop
 # train_1.take_wagon(cargo_1)       # тут получим nil так как вагон не того типа
 p train_1.take_wagon(passenger_1)

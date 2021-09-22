@@ -1,6 +1,8 @@
-require_relative "railway_station"
-require_relative "route"
-require_relative "train"
+# frozen_string_literal: true
+
+require_relative 'railway_station'
+require_relative 'route'
+require_relative 'train'
 
 # Станции:
 kazan    = RailwayStation.new('Kazan')
@@ -9,7 +11,7 @@ moscow   = RailwayStation.new('Moscow')
 kirov    = RailwayStation.new('Kirov')
 
 # Поезда:
-train_1  = Train.new('passenger', 10, '1A' )
+train_1  = Train.new('passenger', 10, '1A')
 train_2  = Train.new('cargo', 20, '2B')
 
 # Маршруты:

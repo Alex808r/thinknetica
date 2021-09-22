@@ -1,4 +1,6 @@
-require_relative "wagon"
+# frozen_string_literal: true
+
+require_relative 'wagon'
 
 class CargoWagon < Wagon
   attr_reader :type, :volume_wagon, :occupied_volume

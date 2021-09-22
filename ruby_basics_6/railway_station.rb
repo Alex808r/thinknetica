@@ -1,11 +1,14 @@
-require_relative "module_instance_counter"
+# frozen_string_literal: true
+
+require_relative 'module_instance_counter'
 
 class RailwayStation
   include InstanceCounter
 
   @@all_stations = []
 
-  def RailwayStation.all  # или self.all или class << self  end
+  # или self.all или class << self  end
+  def self.all
     @@all_stations
   end
 
@@ -27,12 +30,12 @@ class RailwayStation
   end
 
   def train_type_count(type)
-    @list_train.count { |train| train.type_of_train.eql?(type)  }
-    #@list_train.count { |train| train.type_of_train == type  }
+    @list_train.count { |train| train.type_of_train.eql?(type) }
+    # @list_train.count { |train| train.type_of_train == type  }
   end
 
   def train_type(type)
-    @list_train.select{|train| train.type_of_train == type}
+    @list_train.select { |train| train.type_of_train == type }
   end
 
   def send_a_train(train)
@@ -40,7 +43,7 @@ class RailwayStation
   end
 
   private
+
   # сделаем недоступным изменениe списка поездов на станции из вне
   attr_writer :list_train
-
 end

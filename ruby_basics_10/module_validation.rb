@@ -6,7 +6,6 @@ module Validation
 
   VALID_NUMBER = /^[\w\d]{3}-?[\w\d]{0,2}/i.freeze
 
-
   module ClassMethods
     def validate(*attributes)
       @validations ||= []
@@ -25,7 +24,6 @@ module Validation
     end
   end
 
-
   module InstanceMethods
     def validate!
       validations = self.class.instance_variable_get('@validations')
@@ -39,6 +37,7 @@ module Validation
       end
 
       raise ValidationError, errors unless errors.empty?
+
       true
     end
 
@@ -53,7 +52,7 @@ module Validation
     end
 
     def format(attr, value, validation)
-      return "#{attr}: Не верный формат номера #{VALID_NUMBER.to_s}" unless !!"#{value}".match?(validation)
+      return "#{attr}: Не верный формат номера #{VALID_NUMBER}" unless !!value.to_s.match?(validation)
     end
 
     def name_length(attr, value, _validation)

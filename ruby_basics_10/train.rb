@@ -28,7 +28,7 @@ class Train
 
   VALID_NUMBER = /^[\w\d]{3}-?[\w\d]{0,2}/i.freeze
 
-  attr_reader :type_of_train, :current_route, :current_station, :wagons, :train_number, :speed
+  attr_reader :type_of_train, :current_route, :current_station, :wagons
   attr_accessor :speed, :train_number
 
   validate :train_number, :presence
@@ -42,8 +42,7 @@ class Train
     register_instance
   end
 
-  protected
-
+  # rubocop:disable Layout/LineLength
   # def validate!
   #   raise ValidationError, 'Не верный формат номера' if @train_number !~ VALID_NUMBER
   #   # raise ValidationError, "Не верный тип поезда введите 1 или 2" if %w[cargo passenger].include?(@type_of_train)
@@ -51,9 +50,7 @@ class Train
   #   # raise "Номер не может быть короче 3 символов" if train_number.to_s.size < 3
   #   # raise "Номер не может быть пустым" if train_number.empty?
   # end
-
-  public
-
+  # rubocop: anable Layout/LineLength
   def valid?
     validate!
     true
@@ -134,3 +131,6 @@ end
 # # p Train.strong_attr_accessor(:name, Train)
 # p t1 = Train.new('33333')
 # p t.instance_variable_get(:@name)
+
+# p t = Train.new('13')
+# p t.valid?

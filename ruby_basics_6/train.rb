@@ -1,5 +1,7 @@
-require_relative "module_company"
-require_relative "module_instance_counter"
+# frozen_string_literal: true
+
+require_relative 'module_company'
+require_relative 'module_instance_counter'
 
 class Train
   include Company
@@ -8,7 +10,8 @@ class Train
   # @@all_trains = [] - до ревью был массив, но хеш быстрее
 
   @@all_trains = {}
-  def self.find(by_number) # аналогичная запись Train.find(by_number) - лучше self.find
+  # аналогичная запись Train.find(by_number) - лучше self.find
+  def self.find(by_number)
     @@all_trains[by_number]
 
     # Если @@all_trains - массив
@@ -29,7 +32,7 @@ class Train
   end
 
   def speed_up(speed)
-    @speed += speed if speed > 0
+    @speed += speed if speed.positive?
   end
 
   def speed_stop
@@ -37,13 +40,13 @@ class Train
   end
 
   def take_wagon(wagon)
-    #@wagons.push(wagon) if wagon.type == @type_of_train && @speed == 0
-    @wagons.push(wagon) if wagon.type == @type_of_train && self.speed.zero?
+    # @wagons.push(wagon) if wagon.type == @type_of_train && @speed == 0
+    @wagons.push(wagon) if wagon.type == @type_of_train && speed.zero?
   end
 
   def drop_wagon
     # @wagons.pop if @speed == 0 или
-    @wagons.pop if self.speed.zero?
+    @wagons.pop if speed.zero?
   end
 
   def take_route(route)
@@ -54,6 +57,7 @@ class Train
 
   def move_forward
     return unless next_station
+
     @current_station.send_a_train(self)
     @current_station = next_station
     @current_station.take_a_train(self)
@@ -61,6 +65,7 @@ class Train
 
   def move_bakward
     return unless previous_station
+
     @current_station.send_a_train(self)
     @current_station = previous_station
     @current_station.take_a_train(self)
@@ -68,17 +73,18 @@ class Train
 
   def next_station
     if @current_route.stations.index(@current_station) != @current_route.stations.last
-        @current_route.stations[@current_route.stations.index(@current_station)+1]
+      @current_route.stations[@current_route.stations.index(@current_station) + 1]
     end
   end
 
   def previous_station
     if @current_station != @current_route.stations[0]
-      @current_route.stations[@current_route.stations.index(@current_station)-1]
+      @current_route.stations[@current_route.stations.index(@current_station) - 1]
     end
   end
 
   private
+
   # сделаем недоступным изменения скорости и количества вагонов
   attr_writer :speed, :wagons
 

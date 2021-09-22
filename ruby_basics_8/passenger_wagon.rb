@@ -1,7 +1,8 @@
-require_relative "wagon"
+# frozen_string_literal: true
+
+require_relative 'wagon'
 
 class PassengerWagon < Wagon
-
   attr_reader :type, :number_of_seats, :occupied_place
 
   def initialize(number_wagon, number_of_seats)
@@ -18,7 +19,6 @@ class PassengerWagon < Wagon
   def free_place
     @number_of_seats.to_i - @occupied_place.to_i
   end
-
 end
 
 # wagon = PassengerWagon.new('12','45')

@@ -1,6 +1,7 @@
-require_relative "train"
-require_relative "validation_error"
+# frozen_string_literal: true
 
+require_relative 'train'
+require_relative 'validation_error'
 
 class CargoTrain < Train
   def initialize(number)

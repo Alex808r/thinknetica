@@ -1,4 +1,6 @@
-require_relative "module_company"
+# frozen_string_literal: true
+
+require_relative 'module_company'
 
 class Wagon
   include Company
@@ -7,5 +9,4 @@ class Wagon
   def initialize(number_wagon)
     @number_wagon = number_wagon
   end
-
 end

@@ -1,13 +1,14 @@
-require_relative "railway_station"
-require_relative "route"
-require_relative "train"
-require_relative "cargo_wagon"
-require_relative "cargo_train"
-require_relative "passenger_wagon"
-require_relative "passenger_train"
-require_relative "wagon"
-class Main
+# frozen_string_literal: true
 
+require_relative 'railway_station'
+require_relative 'route'
+require_relative 'train'
+require_relative 'cargo_wagon'
+require_relative 'cargo_train'
+require_relative 'passenger_wagon'
+require_relative 'passenger_train'
+require_relative 'wagon'
+class Main
   def initialize
     @stations = []
     @trains = []
@@ -17,8 +18,8 @@ class Main
   def user_choice
     print_main_menu
     loop do
-      puts "*** *** ***"
-      print "Введите номер команды =>: "
+      puts '*** *** ***'
+      print 'Введите номер команды =>: '
       user_input = gets.strip
       case user_input
       when '0' then break
@@ -62,7 +63,7 @@ class Main
   end
 
   def create_railway_station
-    print "Введите наименование станции: "
+    print 'Введите наименование станции: '
     name = gets.strip.capitalize
     @stations.push(RailwayStation.new(name))
     puts "Создана станция: #{@stations.last.name}"
@@ -70,11 +71,11 @@ class Main
   end
 
   def create_train
-    print "Введите номер поезда: "
+    print 'Введите номер поезда: '
     number = gets.strip
-    print "Введите тип поезда(1 - cargo / 2 - passenger): "
+    print 'Введите тип поезда(1 - cargo / 2 - passenger): '
     type = gets.strip
-    type == "1" ? @trains.push(CargoTrain.new(number)) : @trains.push(PassengerTrain.new(number))
+    type == '1' ? @trains.push(CargoTrain.new(number)) : @trains.push(PassengerTrain.new(number))
     puts "Создан поезд #{@trains.last}"
     @trains.last
   end
@@ -92,7 +93,7 @@ class Main
   def trains_list
     @trains.each_with_index do |train, index|
       puts "Индекс: #{index} | Поезд: #{train}"
-        # @trains
+      # @trains
     end
   end
 
@@ -117,14 +118,14 @@ class Main
   def create_route
     if @stations.size >= 2
       "Списко всех станций: #{stations_list(@stations)}"
-      print "Введите начальную станцию(индекс): "
+      print 'Введите начальную станцию(индекс): '
       first_station = gets.to_i
-      print "Введите конечную станцию(индекс): "
+      print 'Введите конечную станцию(индекс): '
       last_station = gets.to_i
       @routes.push(Route.new(@stations[first_station], @stations[last_station]))
       @routes.last
     else
-      puts "У вас должно быть минимум 2 станции, чтобы создать маршрут"
+      puts 'У вас должно быть минимум 2 станции, чтобы создать маршрут'
       nil
     end
   end
@@ -133,13 +134,13 @@ class Main
     @routes.each_with_index do |route, index|
       puts "Индекс маршртуа #{index} | Начальная: #{route.first_station.name} Конечная: #{route.last_station.name}"
     end
-    print "Введите индекс маршрута: "
+    print 'Введите индекс маршрута: '
     @routes[gets.strip.to_i]
   end
 
   def change_route
     route = select_route
-    puts "1 - добавить / 2 - удалить"
+    puts '1 - добавить / 2 - удалить'
     user_choice = gets.strip.to_i
     if user_choice == 1
       add_station_to_route(route)
@@ -149,7 +150,7 @@ class Main
   end
 
   def show_routes_list
-    puts "Все созданные маршруты"
+    puts 'Все созданные маршруты'
     @routes.each_with_index do |routes, index|
       puts "Индекс маршрута: #{index} | Начальная: #{routes.first_station.name} Конечная: #{routes.last_station.name}"
     end
@@ -163,10 +164,10 @@ class Main
 
   def delete_station_to_route(route)
     if route.stations.count <= 2
-      puts "Маршрут состоит из 2 станций их нельзя удалить"
+      puts 'Маршрут состоит из 2 станций их нельзя удалить'
       nil
     else
-      puts "Какую станцию удалить?"
+      puts 'Какую станцию удалить?'
       stations_list(route.stations)
       route.delete_station(route.stations[gets.strip.to_i])
       # puts "Маршрут после изменеия "
@@ -178,7 +179,7 @@ class Main
     @stations.each_with_index do |station, index|
       puts "Номер станции #{index} название станции #{station.name}"
     end
-    print "Введите номер станции: "
+    print 'Введите номер станции: '
     @stations[gets.strip.to_i]
   end
 
@@ -186,13 +187,13 @@ class Main
     @trains.each_with_index do |train, index|
       puts "Индекс поезда #{index} | поезд #{train}"
     end
-    print "Введите индекс поезда: "
+    print 'Введите индекс поезда: '
     @trains[gets.strip.to_i]
   end
 
   def set_route_to_train
     if @trains.empty? || @routes.empty?
-      puts "У вас нет поезда или маршрута"
+      puts 'У вас нет поезда или маршрута'
       nil
     else
       select_train.take_route(select_route)
@@ -201,18 +202,18 @@ class Main
 
   def join_a_wagon
     train = select_train
-    puts "Введите номер вагона"
+    puts 'Введите номер вагона'
     number_wagon = gets.strip
     case train.type_of_train
-    when "cargo"     then train.take_wagon(CargoWagon.new(number_wagon))
-    when "passenger" then train.take_wagon(PassengerWagon.new(number_wagon))
+    when 'cargo'     then train.take_wagon(CargoWagon.new(number_wagon))
+    when 'passenger' then train.take_wagon(PassengerWagon.new(number_wagon))
     end
   end
 
   def delete_a_wagon
     train = select_train
     if train.wagons.empty?
-      puts "У поезда нет вагонов"
+      puts 'У поезда нет вагонов'
       nil
     else
       train.drop_wagon
