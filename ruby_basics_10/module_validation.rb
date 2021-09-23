@@ -11,7 +11,6 @@ module Validation
       @validations ||= []
 
       name = attributes[0]
-      value = instance_variable_get("@#{name}")
 
       validator = attributes[1]
       validation = attributes[2]
@@ -44,19 +43,19 @@ module Validation
     private
 
     def type(attr, value, type)
-      return "#{attr}: Ожидается тип #{type}" unless value.is_a?(type)
+       "#{attr}: Ожидается тип #{type}" unless value.is_a?(type)
     end
 
     def presence(attr, value, _validation)
-      return { attr: attr, error: 'Не может быть пустым' } if value.nil?
+      { attr: attr, error: 'Не может быть пустым' } if value.nil?
     end
 
     def format(attr, value, validation)
-      return "#{attr}: Не верный формат номера #{VALID_NUMBER}" unless !!value.to_s.match?(validation)
+       "#{attr}: Не верный формат номера #{VALID_NUMBER}" unless !!value.to_s.match?(validation)
     end
 
     def name_length(attr, value, _validation)
-      return "#{attr}: должен быть как минимум 2 символа" if value.length < 2
+       "#{attr}: должен быть как минимум 2 символа" if value.length < 2
     end
 
     def valid?
